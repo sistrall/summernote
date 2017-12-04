@@ -206,7 +206,7 @@ export default class Buttons {
           checkClassName: this.options.icons.menuCheck,
           items: this.options.fontNames.filter(this.isFontInstalled.bind(this)),
           template: (item) => {
-            return '<span style="font-family:' + item + '">' + item + '</span>';
+            return '<span style="font-family: \'' + item + '\'">' + item + '</span>';
           },
           click: this.context.createInvokeHandlerAndUpdateState('editor.fontName')
         })

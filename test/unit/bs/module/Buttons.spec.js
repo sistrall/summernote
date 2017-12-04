@@ -218,7 +218,24 @@ describe('Buttons', () => {
   });
 
   describe('font size button', () => {
-    it('should update font size button value when changing font size with empty content', () => {
+    it('should update font size button value when changing font size with range', () => {
+      var $fontSizeDropdown = $toolbar.find('.dropdown-fontsize');
+      var $fontSizeButton = $fontSizeDropdown.siblings('button');
+      var $fontSizeList = $fontSizeDropdown.find('a');
+      var selectedSize = '36';
+      range.createFromNode($editable.find('p')[0]).normalize().select();
+
+      // click on dropdown button
+      $fontSizeButton.trigger('click');
+      // select a font size
+      $fontSizeList.filter('[data-value="' + selectedSize + '"]').trigger('click');
+
+      expect($fontSizeButton.text().trim()).to.not.equal(selectedSize);
+    });
+  });
+
+  describe('font size button with empty content', () => {
+    it('should not update font size button value when changing font size with empty content', () => {
       var $fontSizeDropdown = $toolbar.find('.dropdown-fontsize');
       var $fontSizeButton = $fontSizeDropdown.siblings('button');
       var $fontSizeList = $fontSizeDropdown.find('a');
@@ -229,7 +246,7 @@ describe('Buttons', () => {
       // select a font size
       $fontSizeList.filter('[data-value="' + selectedSize + '"]').trigger('click');
 
-      expect($fontSizeButton.text().trim()).to.equal(selectedSize);
+      expect($fontSizeButton.text().trim()).to.not.equal(selectedSize);
     });
   });
 });
